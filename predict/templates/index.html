@@ -1,0 +1,99 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Laptop Price Predictor</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <h1>💻 Laptop Price Predictor</h1>
+            <p>Predict laptop price using Machine Learning</p>
+        </div>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="ram">RAM (GB)</label>
+                <input
+                    type="number"
+                    id="ram"
+                    name="ram"
+                    placeholder="Example: 16"
+                    min="1"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="screen">Screen Size (Inches)</label>
+                <input
+                    type="number"
+                    step="0.1"
+                    id="screen"
+                    name="screen"
+                    placeholder="Example: 15.6"
+                    min="1"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="weight">Weight (KG)</label>
+                <input
+                    type="number"
+                    step="0.01"
+                    id="weight"
+                    name="weight"
+                    placeholder="Example: 1.8"
+                    min="0.1"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="battery">Battery Hours</label>
+                <input
+                    type="number"
+                    step="0.1"
+                    id="battery"
+                    name="battery"
+                    placeholder="Example: 8"
+                    min="1"
+                    required
+                >
+            </div>
+
+            <button type="submit">
+                Predict Laptop Price
+            </button>
+
+        </form>
+
+        {% if prediction %}
+            <div class="result">
+                <p>Predicted Laptop Price</p>
+                <h2>₹ {{ prediction }}</h2>
+            </div>
+        {% endif %}
+
+        <div class="footer">
+            Multiple Linear Regression Model
+        </div>
+
+    </div>
+
+</body>
+</html>
